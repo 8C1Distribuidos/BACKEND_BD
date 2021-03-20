@@ -7,16 +7,13 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * User Dto to show the general info of the users
- * @author Luis
+ * Category Dto to show the general info of the products categories
+ * @author Kaleb
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto implements Serializable {
+public class CategoryDto implements Serializable{
     Integer id;
-    String firstName;
-    String lastName;
-    String email;
-    String photo;
+    String name;
 }
