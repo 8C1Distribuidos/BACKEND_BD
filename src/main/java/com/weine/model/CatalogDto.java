@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * Category Dto to show the general info of the products categories
- * @author Kaleb
+ * User Dto to show the general info of the catalogs
+ * @author Luis
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDto implements Serializable{
+public class CatalogDto implements Serializable {
     Integer id;
     String name;
-    CatalogDto catalog;
 }

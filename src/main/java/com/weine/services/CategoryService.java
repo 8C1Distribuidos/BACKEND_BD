@@ -1,5 +1,6 @@
 package com.weine.services;
 
+import com.weine.model.CatalogDto;
 import com.weine.model.CategoryDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +25,12 @@ public class CategoryService {
         CategoryDto cat1 = new CategoryDto();
         cat1.setId(1);
         cat1.setName("Comida rapida");
+        cat1.setCatalog(new CatalogDto(1,"Vinos"));
 
         CategoryDto cat2 = new CategoryDto();
         cat2.setId(2);
         cat2.setName("Bebidas");
+        cat1.setCatalog(new CatalogDto(2,"Destilados"));
 
         categoryList.add(cat1);
         categoryList.add(cat2);

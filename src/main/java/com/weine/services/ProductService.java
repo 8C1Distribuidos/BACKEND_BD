@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,33 +20,14 @@ import java.util.List;
 @Service
 public class ProductService {
     Logger logger = LoggerFactory.getLogger(UserService.class);
-    List<ProductDto> productList = new ArrayList<>();
-
-    public ProductService()
-    {
-        ProductDto product1 = new ProductDto();
-        product1.setId(1);
-        product1.setName("Torta de tamal");
-        product1.setPrice(BigDecimal.valueOf(36.99));
-        product1.setStock(49);
-        product1.setImageLink("url1");
-        product1.setCategory(new CategoryDto());
-
-        ProductDto product2 = new ProductDto();
-        product2.setId(2);
-        product2.setName("Hamburguesa");
-        product2.setPrice(BigDecimal.valueOf(48));
-        product2.setStock(55);
-        product2.setImageLink("url2");
-        product2.setCategory(new CategoryDto());
-
-        productList.add(product1);
-        productList.add(product2);
-    }
+    public final static List<ProductDto> PRODUCT_LIST = Arrays.asList(
+            new ProductDto(1,"Torta de tamal", "url1", BigDecimal.valueOf(36.99), 49, new CategoryDto(1,"Destilado",null)),
+            new ProductDto(2,"Hamburgesa", "url2", BigDecimal.valueOf(48), 55, new CategoryDto(2,"Licor",null))
+            );
 
     public Page<ProductDto> getProducts(Pageable pageable)
     {
-        Page<ProductDto> productDtos = new PageImpl<>(productList);
+        Page<ProductDto> productDtos = new PageImpl<>(PRODUCT_LIST);
         return  productDtos;
     }
 }

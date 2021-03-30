@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Ticket Dto to show the general info of the users
@@ -13,8 +15,9 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TicketDto {
+public class TicketDto implements Serializable {
     Integer id;
-    LocalDate date;
+    LocalDateTime date;
     Integer priceTotal;
+    List<PurchaseItemDto> purchaseList;
 }

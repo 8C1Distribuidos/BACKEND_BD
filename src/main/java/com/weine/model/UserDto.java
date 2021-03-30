@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * User Dto to show the general info of the users
@@ -16,7 +18,11 @@ import java.io.Serializable;
 public class UserDto implements Serializable {
     Integer id;
     String firstName;
-    String lastName;
+    String paternalName;
+    String maternalName;
     String email;
     String photo;
+    String password;
+    LocalDate birthDate;
+    List<RoleDto> roleList;
 }
