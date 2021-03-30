@@ -1,6 +1,6 @@
 package com.weine.controllers;
 
-import com.weine.model.ProductDto;
+import com.weine.model.dtos.ProductDto;
 import com.weine.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -25,11 +25,13 @@ public class ProductController {
     private  final ProductService productService;
 
     @GetMapping()
-    public ResponseEntity<Page<ProductDto>> getCatalogs(
+    public ResponseEntity<Page<ProductDto>> getProducts(
             @PageableDefault(page = 0,size = 5) Pageable pageable
     )
     {
         logger.info("Get products...");
-        return ResponseEntity.ok(this.productService.getProducts(pageable));
+        ResponseEntity<Page<ProductDto>> response = ResponseEntity.ok(this.productService.getProducts(pageable));
+        logger.info("Products obtained...");
+        return response;
     }
 }

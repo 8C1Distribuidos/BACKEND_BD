@@ -1,6 +1,6 @@
 package com.weine.controllers;
 
-import com.weine.model.TicketDto;
+import com.weine.model.dtos.TicketDto;
 import com.weine.services.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

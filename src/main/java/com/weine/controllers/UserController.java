@@ -1,6 +1,6 @@
 package com.weine.controllers;
 
-import com.weine.model.UserDto;
+import com.weine.model.dtos.UserDto;
 import com.weine.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

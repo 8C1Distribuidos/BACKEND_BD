@@ -1,6 +1,6 @@
 package com.weine.services;
 
-import com.weine.model.UserDto;
+import com.weine.model.dtos.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

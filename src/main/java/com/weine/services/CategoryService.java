@@ -1,7 +1,7 @@
 package com.weine.services;
 
-import com.weine.model.CatalogDto;
-import com.weine.model.CategoryDto;
+import com.weine.model.dtos.CatalogDto;
+import com.weine.model.dtos.CategoryDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

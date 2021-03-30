@@ -1,7 +1,7 @@
 package com.weine.services;
 
-import com.weine.model.PurchaseItemDto;
-import com.weine.model.TicketDto;
+import com.weine.model.dtos.PurchaseItemDto;
+import com.weine.model.dtos.TicketDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

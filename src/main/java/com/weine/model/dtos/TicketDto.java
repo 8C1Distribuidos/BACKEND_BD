@@ -1,4 +1,4 @@
-package com.weine.model;
+package com.weine.model.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

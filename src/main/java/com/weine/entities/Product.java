@@ -1,8 +1,6 @@
 package com.weine.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,8 +9,9 @@ import java.math.BigDecimal;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "product")
-@Data
+@Table(name = "productos")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product implements Serializable {
@@ -20,9 +19,15 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
-    @Column(name = "productName", nullable = false, length = 100)
-    private String productName;
-    @Column(name = "Price", nullable = false)
+    @Column(name = "nombre", unique = true, nullable = false, length = 50)
+    private String name;
+    @Column(name = "link_imagen", nullable = false, length = 150)
+    private String imageLink;
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
+    @Column(name = "precio", nullable = false)
     private BigDecimal price;
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private Category category;
 }

@@ -1,6 +1,6 @@
 package com.weine.controllers;
 
-import com.weine.model.CategoryDto;
+import com.weine.model.dtos.CategoryDto;
 import com.weine.services.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
