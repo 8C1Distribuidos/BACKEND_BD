@@ -38,6 +38,7 @@ public class UserService {
 
     public Page<UserDto> getUsers(Pageable pageable)
     {
+        List<UserDto> userDtoList = new ArrayList<>();
         Page<UserDto> userDtos = new PageImpl<>(userList);
         return  userDtos;
     }
