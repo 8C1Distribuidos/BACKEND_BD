@@ -26,7 +26,7 @@ public class ProductController {
 
     @GetMapping()
     public ResponseEntity<Page<ProductDto>> getProducts(
-            @PageableDefault(page = 0,size = 5) Pageable pageable
+            @PageableDefault(page = 0,size = 10) Pageable pageable
     )
     {
         logger.info("Get products...");

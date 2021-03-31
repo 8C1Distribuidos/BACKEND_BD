@@ -12,7 +12,7 @@ import org.mapstruct.NullValueCheckStrategy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+@Mapper(componentModel = "spring")
 public interface IProductMapper {
 
     ProductDto toProductDto(Product product);
