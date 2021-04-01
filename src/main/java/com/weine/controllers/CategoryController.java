@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Controller to map the http request of the catalog interface
  * @author Kaleb
@@ -25,11 +27,9 @@ public class CategoryController {
     private  final CategoryService categoryService;
 
     @GetMapping()
-    public ResponseEntity<Page<CategoryDto>> getCatalogs(
-            @PageableDefault(page = 0,size = 5) Pageable pageable
-    )
+    public ResponseEntity<List<CategoryDto>> getCatalogs()
     {
         logger.info("Get categories...");
-        return ResponseEntity.ok(this.categoryService.getCategories(pageable));
+        return ResponseEntity.ok(this.categoryService.getCategories());
     }
 }

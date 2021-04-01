@@ -23,6 +23,8 @@ public class Category implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_catalogo", nullable = false)
     private Catalog catalog;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "category")
     private List<Product> products;
 

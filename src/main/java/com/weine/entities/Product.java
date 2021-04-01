@@ -26,6 +26,8 @@ public class Product implements Serializable {
     private Integer stock;
     @Column(name = "precio", nullable = false)
     private BigDecimal price;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria", nullable = false)
     private Category category;

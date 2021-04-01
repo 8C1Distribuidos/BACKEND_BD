@@ -1,7 +1,10 @@
 package com.weine.services;
 
+import com.weine.mappers.IProductMapper;
 import com.weine.model.dtos.CatalogDto;
 import com.weine.model.dtos.CategoryDto;
+import com.weine.repositories.jpa.ICategoryRep;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,29 +19,15 @@ import java.util.List;
  * Service to get the products categories information
  * @author Kaleb
  */
+@RequiredArgsConstructor
 @Service
 public class CategoryService {
     Logger logger = LoggerFactory.getLogger(UserService.class);
-    List<CategoryDto> categoryList = new ArrayList<>();
+    private final ICategoryRep categoryRep;
+    private final IProductMapper productMapper;
 
-    public CategoryService(){
-        CategoryDto cat1 = new CategoryDto();
-        cat1.setId(1);
-        cat1.setName("Comida rapida");
-        cat1.setCatalog(new CatalogDto(1,"Vinos"));
-
-        CategoryDto cat2 = new CategoryDto();
-        cat2.setId(2);
-        cat2.setName("Bebidas");
-        cat1.setCatalog(new CatalogDto(2,"Destilados"));
-
-        categoryList.add(cat1);
-        categoryList.add(cat2);
-    }
-
-    public Page<CategoryDto> getCategories(Pageable pageable)
+    public List<CategoryDto> getCategories()
     {
-        Page<CategoryDto> categoryDtos = new PageImpl<>(categoryList);
-        return  categoryDtos;
+        return productMapper.toCategoryDtoList(categoryRep.findAll());
     }
 }
