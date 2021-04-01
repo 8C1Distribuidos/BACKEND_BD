@@ -24,11 +24,11 @@ public class TicketService {
     Logger logger = LoggerFactory.getLogger(UserService.class);
     private final ITicketRep ticketRep;
     private final ITicketMapper ticketMapper;
-
-    /*List<TicketDto> ticketList = Arrays.asList(
-            new TicketDto(1,LocalDateTime.now(),250, Set.of(new PurchaseItemDto(1, ProductService.PRODUCT_LIST.get(0), 2))),
-            new TicketDto(2022,LocalDateTime.now(),2050, Set.of(new PurchaseItemDto(1, ProductService.PRODUCT_LIST.get(0), 5)))
-    );*/
+    /**
+     * Function to show the tickets in pages
+     * @param pageable The details of the page
+     * @return The Page of tickets dto
+     */
     @ReadOnlyProperty
     public Page<TicketDto> getTickets(Pageable pageable)
     {

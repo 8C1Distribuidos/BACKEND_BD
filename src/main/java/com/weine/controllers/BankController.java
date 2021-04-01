@@ -1,7 +1,7 @@
 package com.weine.controllers;
 
-import com.weine.model.dtos.TicketDto;
-import com.weine.services.TicketService;
+import com.weine.model.dtos.BankAccountDto;
+import com.weine.services.BankService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,24 +14,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller to map the http request of the ticket interface
- * @author Luis
+ * Controller to map the http request of the bank account interface
+ * @author Kaleb
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/tickets")
-public class TicketController {
-    Logger logger = LoggerFactory.getLogger(TicketController.class);
-    private  final TicketService ticketService;
-
+@RequestMapping("/bank/accounts")
+public class BankController {
+    Logger logger = LoggerFactory.getLogger(BankController.class);
+    private  final BankService bankService;
     @GetMapping()
-    public ResponseEntity<Page<TicketDto>> getTickets(
+    public ResponseEntity<Page<BankAccountDto>> getBankAccounts(
             @PageableDefault(page = 0,size = 5) Pageable pageable
     )
     {
-        logger.info("Get tickets...");
-        ResponseEntity<Page<TicketDto>> response = ResponseEntity.ok(this.ticketService.getTickets(pageable));
-        logger.info("Ticket obtained...");
+        logger.info("Get accounts...");
+        ResponseEntity<Page<BankAccountDto>> response = ResponseEntity.ok(this.bankService.getBankAccounts(pageable));
+        logger.info("Accounts obtained...");
         return response;
     }
 }

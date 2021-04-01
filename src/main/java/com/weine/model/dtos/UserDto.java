@@ -24,5 +24,5 @@ public class UserDto implements Serializable {
     String photo;
     String password;
     LocalDate birthDate;
-    List<RoleDto> roleList;
+    List<RoleDto> roles;
 }

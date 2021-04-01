@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
     Logger logger = LoggerFactory.getLogger(CategoryController.class);
     private  final CategoryService categoryService;
@@ -30,6 +30,8 @@ public class CategoryController {
     public ResponseEntity<List<CategoryDto>> getCatalogs()
     {
         logger.info("Get categories...");
-        return ResponseEntity.ok(this.categoryService.getCategories());
+        ResponseEntity<List<CategoryDto>> mappers = ResponseEntity.ok(this.categoryService.getCategories());
+        logger.info("Categories obtained...");
+        return mappers;
     }
 }

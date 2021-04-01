@@ -22,9 +22,9 @@ public class Ticket {
     private Integer id;
     @Column(name = "id_usuario", nullable = false)
     private Integer idUser;
-    @Column(name = "fecha_compra")
+    @Column(name = "fecha_compra", nullable = false)
     private LocalDateTime dateTime;
-    @Column(name = "monto_total")
+    @Column(name = "monto_total", nullable = false)
     private Integer totalPrice;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

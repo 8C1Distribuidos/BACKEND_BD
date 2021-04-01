@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller to map the http request of the catalog interface
+ * @author Luis
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
     private  final UserService userService;
@@ -29,6 +30,8 @@ public class UserController {
     )
     {
         logger.info("Get users...");
-        return ResponseEntity.ok(this.userService.getUsers(pageable));
+        ResponseEntity<Page<UserDto>> response = ResponseEntity.ok(this.userService.getUsers(pageable));
+        logger.info("Users obtained...");
+        return response;
     }
 }

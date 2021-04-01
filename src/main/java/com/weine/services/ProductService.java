@@ -32,12 +32,6 @@ public class ProductService {
     private final IProductRep productRep;
     private final ProductCriteriaRep productCriteriaRep;
     private final IProductMapper productMapper;
-
-    public final static List<ProductDto> PRODUCT_LIST = Arrays.asList(
-            new ProductDto(1,"Torta de tamal", "url1", BigDecimal.valueOf(36.99), 49, new CategoryDto(1,"Destilado",null)),
-            new ProductDto(2,"Hamburgesa", "url2", BigDecimal.valueOf(48), 55, new CategoryDto(2,"Licor",null))
-            );
-
     /**
      * Function to show the products in pages
      * @param pageProp The details of the page

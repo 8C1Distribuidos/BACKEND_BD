@@ -25,7 +25,10 @@ public class CategoryService {
     Logger logger = LoggerFactory.getLogger(UserService.class);
     private final ICategoryRep categoryRep;
     private final IProductMapper productMapper;
-
+    /**
+     * Function to get the list of categories
+     * @return The categories
+     */
     public List<CategoryDto> getCategories()
     {
         return productMapper.toCategoryDtoList(categoryRep.findAll());
