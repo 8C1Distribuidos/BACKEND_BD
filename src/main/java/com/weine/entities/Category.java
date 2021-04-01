@@ -8,12 +8,11 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity
-@Table(name = "categoria_productos")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "categoria_productos")
 public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -27,4 +26,11 @@ public class Category implements Serializable {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "category")
     private List<Product> products;
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name +
+                '}';
+    }
 }

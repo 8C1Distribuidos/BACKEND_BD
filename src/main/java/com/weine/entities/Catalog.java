@@ -8,13 +8,11 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-
-@Entity
-@Table(name = "catalogo_productos")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "catalogo_productos")
 public class Catalog {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -24,4 +22,12 @@ public class Catalog {
     private String name;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "catalog")
     private List<Category> categories;
+
+    @Override
+    public String toString() {
+        return "Catalog{" +
+                "id=" + id +
+                "name=" + name +
+                '}';
+    }
 }

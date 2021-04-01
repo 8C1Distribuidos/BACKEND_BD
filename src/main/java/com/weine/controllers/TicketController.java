@@ -29,6 +29,8 @@ public class TicketController {
     )
     {
         logger.info("Get tickets...");
-        return ResponseEntity.ok(this.ticketService.getTickets(pageable));
+        ResponseEntity<Page<TicketDto>> response = ResponseEntity.ok(this.ticketService.getTickets(pageable));
+        logger.info("Ticket obtained...");
+        return response;
     }
 }

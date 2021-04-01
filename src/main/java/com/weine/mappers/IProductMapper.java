@@ -14,7 +14,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IProductMapper {
-
     ProductDto toProductDto(Product product);
 
     List<ProductDto> toProductDtoList(List<Product> products);

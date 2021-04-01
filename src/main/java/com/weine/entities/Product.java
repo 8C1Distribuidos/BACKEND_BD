@@ -8,12 +8,11 @@ import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity
-@Table(name = "productos")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "productos")
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -30,4 +29,15 @@ public class Product implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria", nullable = false)
     private Category category;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", imageLink='" + imageLink + '\'' +
+                ", stock=" + stock +
+                ", price=" + price +
+                '}';
+    }
 }

@@ -1,5 +1,7 @@
 package com.weine.controllers;
 
+import com.weine.model.criteria.PageProp;
+import com.weine.model.criteria.ProductCriteria;
 import com.weine.model.dtos.ProductDto;
 import com.weine.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +28,11 @@ public class ProductController {
 
     @GetMapping()
     public ResponseEntity<Page<ProductDto>> getProducts(
-            @PageableDefault(page = 0,size = 10) Pageable pageable
+            PageProp pageProp, ProductCriteria productCriteria
     )
     {
         logger.info("Get products...");
-        ResponseEntity<Page<ProductDto>> response = ResponseEntity.ok(this.productService.getProducts(pageable));
+        ResponseEntity<Page<ProductDto>> response = ResponseEntity.ok(this.productService.getProducts(pageProp, productCriteria));
         logger.info("Products obtained...");
         return response;
     }
