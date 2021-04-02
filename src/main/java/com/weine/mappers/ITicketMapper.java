@@ -6,8 +6,9 @@ import com.weine.model.dtos.PurchaseItemDto;
 import com.weine.model.dtos.TicketDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.NullValueCheckStrategy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface ITicketMapper {
 
     @Mapping(target = "purchaseList", source = "purchaseItems")

@@ -41,8 +41,7 @@ public class ProductCriteriaRep extends CriteriaRep<Product, ProductCriteria>{
                     predicates.add(criteriaBuilder.lessThanOrEqualTo(entityRoot.get("price"), searchCriteria.getPrice()));
                 }
             }
-            return  criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         }
-        return null;
+        return  criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 }

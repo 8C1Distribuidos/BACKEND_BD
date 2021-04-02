@@ -1,6 +1,5 @@
 server:
   port: 9081
-  
 spring:
   jpa:
     show-sql: true
@@ -13,6 +12,6 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/weine
+    url: jdbc:mysql://localhost:3306/weine_test
     username: root
     password:

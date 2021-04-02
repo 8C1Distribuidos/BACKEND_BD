@@ -37,6 +37,10 @@ public abstract class CriteriaRep<T,X> {
      */
     public Page<T> findAllWithFilters(PageProp pageProp, X searchCriteria, Class<T> entity)
     {
+        if(pageProp == null)
+        {
+            pageProp = new PageProp();
+        }
         //Initializing the query
         CriteriaQuery<T> criteriaQuery = this.criteriaBuilder.createQuery(entity);
         Root<T> entityRoot = criteriaQuery.from(entity);
@@ -108,7 +112,12 @@ public abstract class CriteriaRep<T,X> {
      * @return The pageable object
      */
     protected Pageable getPageable(PageProp pageProp) {
-        Sort sort = Sort.by(pageProp.getSortDirection(), pageProp.getSortBy());
-        return PageRequest.of(pageProp.getPage(), pageProp.getSize(), sort);
+        if(pageProp.getSortBy() != null) {
+            Sort sort = Sort.by(pageProp.getSortDirection(), pageProp.getSortBy());
+            return PageRequest.of(pageProp.getPage(), pageProp.getSize(), sort);
+        }
+        else{
+            return PageRequest.of(pageProp.getPage(), pageProp.getSize());
+        }
     }
 }
