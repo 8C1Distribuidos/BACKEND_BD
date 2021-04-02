@@ -2,6 +2,7 @@ package com.weine.controllers;
 
 import com.weine.exception.ApiRequestException;
 import com.weine.model.criteria.PageProp;
+import com.weine.model.dtos.CategoryDto;
 import com.weine.services.IServiceApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * Abstract class to manage the request of the clients in a generic form and works as template for a <b>Controller Class</b>,<br>
@@ -76,7 +79,18 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
         logger.info(getEntityName()+"s obtained...");
         return response;
     }
-
+    /**
+     * Function to get the request of the client in a <b>GET</b> form.<br>
+     * This request is to obtain all the objects in a list.
+     * @return The list obtained
+     */
+    public ResponseEntity<List<D>> getObjects()
+    {
+        logger.info("Obtaining "+ getEntityPluralName()+ "...");
+        ResponseEntity<List<D>> response = ResponseEntity.ok(this.service.getObjects());
+        logger.info(getEntityName()+"s obtained...");
+        return response;
+    }
     /**
      * Function to get the request of the client in a <b>GET</b> form.<br>
      * This request is to obtain the object with their own id.

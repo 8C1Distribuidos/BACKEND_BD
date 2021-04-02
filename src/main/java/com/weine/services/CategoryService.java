@@ -1,50 +1,35 @@
 package com.weine.services;
 
 import com.weine.entities.Category;
-import com.weine.entities.Product;
 import com.weine.mappers.IProductMapper;
-import com.weine.model.dtos.CatalogDto;
 import com.weine.model.dtos.CategoryDto;
-import com.weine.model.dtos.ProductDto;
 import com.weine.repositories.jpa.ICategoryRep;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Service to get the products categories information
  * @author Kaleb
+ * @author Luis
  */
 @RequiredArgsConstructor
 @Service
-public class CategoryService {
+public class CategoryService implements IServiceApi<CategoryDto, Object>{
     Logger logger = LoggerFactory.getLogger(UserService.class);
     private final ICategoryRep categoryRep;
     private final IProductMapper productMapper;
-    /**
-     * Function to get the list of categories
-     * @return The categories
-     */
-    public List<CategoryDto> getCategories()
+    @Override
+    public List<CategoryDto> getObjects()
     {
         return productMapper.toCategoryDtoList(categoryRep.findAll());
     }
 
-    /**
-     * Function to find the category by id
-     * @param id Id of the Category to search
-     * @return The object result
-     */
-    public CategoryDto getCategory(Integer id)
-    {
+    @Override
+    public CategoryDto find(Integer id) {
         if(id != null) {
             Optional<Category> pro = categoryRep.findById(id);
             if (pro.isPresent()) {
@@ -53,5 +38,44 @@ public class CategoryService {
             }
         }
         return null;
+    }
+
+    @Override
+    public CategoryDto save(CategoryDto request) throws RuntimeException {
+        if(request != null) {
+            request.setId(null);//Just to clear the field
+            Category category = productMapper.toCategory(request);
+            Category response = categoryRep.save(category);
+            return productMapper.toCategoryDto(response);
+        }
+        return null;
+    }
+
+    @Override
+    public CategoryDto update(CategoryDto request) throws RuntimeException {
+        if(request != null) {
+            if(find(request.getId()) != null) {
+                request.setId(null);//Just to clear the field
+                Category category = productMapper.toCategory(request);
+                Category response = categoryRep.save(category);
+                return productMapper.toCategoryDto(response);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        if(id != null) {
+            try {
+                categoryRep.deleteById(id);
+                return true;
+            }
+            catch (Exception e)
+            {
+                logger.error(e.getMessage());
+            }
+        }
+        return false;
     }
 }

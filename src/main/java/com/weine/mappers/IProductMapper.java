@@ -8,7 +8,6 @@ import com.weine.model.dtos.CategoryDto;
 import com.weine.model.dtos.ProductDto;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
 
 import java.util.List;
@@ -24,7 +23,11 @@ public interface IProductMapper {
 
     CatalogDto toCatalogDto(Catalog catalog);
 
+
     List<CategoryDto> toCategoryDtoList(List<Category> categories);
 
     CategoryDto toCategoryDto(Category category);
+
+    @InheritInverseConfiguration
+    Category toCategory(CategoryDto category);
 }
