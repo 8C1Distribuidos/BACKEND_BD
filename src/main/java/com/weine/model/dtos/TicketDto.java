@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class TicketDto implements Serializable {
     Integer id;
+    Integer idUser;
     LocalDateTime dateTime;
     Integer totalPrice;
     Set<PurchaseItemDto> purchaseList = new HashSet<>();

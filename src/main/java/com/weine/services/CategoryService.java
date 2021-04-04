@@ -41,7 +41,7 @@ public class CategoryService implements IServiceApi<CategoryDto, Object>{
     }
 
     @Override
-    public CategoryDto save(CategoryDto request) throws RuntimeException {
+    public CategoryDto save(CategoryDto request) {
         if(request != null) {
             request.setId(null);//Just to clear the field
             Category category = productMapper.toCategory(request);
@@ -52,7 +52,7 @@ public class CategoryService implements IServiceApi<CategoryDto, Object>{
     }
 
     @Override
-    public CategoryDto update(CategoryDto request) throws RuntimeException {
+    public CategoryDto update(CategoryDto request) {
         if(request != null) {
             if(find(request.getId()) != null) {
                 request.setId(null);//Just to clear the field
@@ -65,17 +65,17 @@ public class CategoryService implements IServiceApi<CategoryDto, Object>{
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(Integer id)  {
         if(id != null) {
-            try {
-                categoryRep.deleteById(id);
-                return true;
-            }
-            catch (Exception e)
-            {
-                logger.error(e.getMessage());
-            }
+            categoryRep.deleteById(id);
+            return true;
         }
+        return false;
+    }
+    @Override
+    public boolean checkExistence(Integer id) {
+        if(id != null)
+            return categoryRep.findById(id).isPresent();
         return false;
     }
 }

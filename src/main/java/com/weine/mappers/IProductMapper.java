@@ -5,7 +5,7 @@ import com.weine.entities.Category;
 import com.weine.entities.Product;
 import com.weine.model.dtos.CatalogDto;
 import com.weine.model.dtos.CategoryDto;
-import com.weine.model.dtos.ProductDto;
+import com.weine.model.dtos.ProductFullInfoDto;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
@@ -14,12 +14,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface IProductMapper {
-    ProductDto toProductDto(Product product);
+    ProductFullInfoDto toProductFullDto(Product product);
 
     @InheritInverseConfiguration
-    Product toProduct(ProductDto productDto);
+    Product toProduct(ProductFullInfoDto productFullInfoDto);
 
-    List<ProductDto> toProductDtoList(List<Product> products);
+    List<ProductFullInfoDto> toProductDtoList(List<Product> products);
 
     CatalogDto toCatalogDto(Catalog catalog);
 

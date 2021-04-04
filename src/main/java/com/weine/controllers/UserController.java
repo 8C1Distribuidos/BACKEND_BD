@@ -1,37 +1,64 @@
 package com.weine.controllers;
 
 import com.weine.model.dtos.UserDto;
+import com.weine.services.IServiceApi;
 import com.weine.services.UserService;
-import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller to map the http request of the catalog interface
  * @author Luis
  */
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/users")
-public class UserController {
-    Logger logger = LoggerFactory.getLogger(UserController.class);
-    private  final UserService userService;
+public class UserController extends ControllerApi<UserDto, Object, UserService>{
 
-    @GetMapping()
-    public ResponseEntity<Page<UserDto>> getCatalogs(
-            @PageableDefault(page = 0,size = 5) Pageable pageable
-    )
-    {
-        logger.info("Get users...");
-        ResponseEntity<Page<UserDto>> response = ResponseEntity.ok(this.userService.getUsers(pageable));
-        logger.info("Users obtained...");
-        return response;
+    public UserController(IServiceApi<UserDto, Object> service) {
+        super(service);
+        logger = LoggerFactory.getLogger(UserController.class);
+    }
+
+    @GetMapping
+    @Override
+    public ResponseEntity<Page<UserDto>> getPage(Pageable pageProp) {
+        return super.getPage(pageProp);
+    }
+
+    @GetMapping("/find")
+    @Override
+    public ResponseEntity<UserDto> findObject(int id) {
+        return super.findObject(id);
+    }
+
+    @PostMapping
+    @Override
+    public ResponseEntity<UserDto> saveObject(@RequestBody UserDto requestObject) {
+        return super.saveObject(requestObject);
+    }
+
+    @PutMapping
+    @Override
+    public ResponseEntity<UserDto> updateObject(@RequestBody UserDto requestObject) {
+        return super.updateObject(requestObject);
+    }
+
+    @DeleteMapping
+    @Override
+    public ResponseEntity<?> deleteObject(int id) {
+        return super.deleteObject(id);
+    }
+
+    @Override
+    protected String getEntityName() {
+        return "User";
+    }
+
+    @Override
+    protected String getEntityPluralName() {
+        return "Users";
     }
 }

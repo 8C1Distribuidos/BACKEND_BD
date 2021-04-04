@@ -1,6 +1,7 @@
 package com.weine.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
+import static org.hibernate.annotations.CascadeType.*;
 
 @Data
 @AllArgsConstructor
@@ -28,7 +30,7 @@ public class Ticket {
     private Integer totalPrice;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ticket")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ticket")
+    @Cascade({ALL})
     private Set<PurchaseItem> purchaseItems = new HashSet<>(1);
 }

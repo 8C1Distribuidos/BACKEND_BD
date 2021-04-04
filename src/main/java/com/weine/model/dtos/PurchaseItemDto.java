@@ -1,8 +1,10 @@
 package com.weine.model.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.io.Serializable;
 
@@ -17,4 +19,6 @@ public class PurchaseItemDto implements Serializable {
     Integer idItem;
     ProductDto product;
     Integer amount;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    boolean toDelete = false;
 }

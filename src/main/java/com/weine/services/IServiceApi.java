@@ -66,8 +66,15 @@ public interface IServiceApi<D,C> {
 
     /**
      * Function to <b>delete</b> the product in the database
-     * @param id The id of the obeject to delete
+     * @param id The id of the object to delete
      * @return The result of the request EITHER was deleted {@code true} or not {@code false}
      */
-    boolean delete(Integer id);
+    boolean delete(Integer id) throws RuntimeException;
+
+    /**
+     * Function to <b>check</b> if one product exist
+     * @param id The id of the object to check
+     * @return The result of the search EITHER was found {@code true} or not {@code false}
+     */
+    boolean checkExistence(Integer id);
 }

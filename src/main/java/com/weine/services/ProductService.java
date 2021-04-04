@@ -4,12 +4,10 @@ import com.weine.entities.Product;
 import com.weine.mappers.IProductMapper;
 import com.weine.model.criteria.PageProp;
 import com.weine.model.criteria.ProductCriteria;
-import com.weine.model.dtos.ProductDto;
+import com.weine.model.dtos.ProductFullInfoDto;
 import com.weine.repositories.criteria.ProductCriteriaRep;
 import com.weine.repositories.jpa.IProductRep;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,72 +21,64 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 @Service
-public class ProductService implements IServiceApi<ProductDto, ProductCriteria>{
-    Logger logger = LoggerFactory.getLogger(UserService.class);
+public class ProductService implements IServiceApi<ProductFullInfoDto, ProductCriteria>{
     private final IProductRep productRep;
     private final ProductCriteriaRep productCriteriaRep;
     private final IProductMapper productMapper;
 
     @Override
-    public Page<ProductDto> getPage(PageProp pageProp, ProductCriteria productCriteria)
+    public Page<ProductFullInfoDto> getPage(PageProp pageProp, ProductCriteria productCriteria)
     {
         Page<Product> products = productCriteriaRep.findAllWithFilters(pageProp,productCriteria,Product.class);
-        return products.map(productMapper::toProductDto);
+        return products.map(productMapper::toProductFullDto);
     }
 
     @Override
-    public ProductDto find(Integer id){
+    public ProductFullInfoDto find(Integer id){
         if(id != null) {
             Optional<Product> pro = productRep.findById(id);
             if (pro.isPresent()) {
                 Product product = pro.get();
-                return productMapper.toProductDto(product);
+                return productMapper.toProductFullDto(product);
             }
         }
         return null;
     }
     @Override
-    public ProductDto save(ProductDto productDto) throws RuntimeException{
-        if(productDto != null) {
-            productDto.setId(null);//Just to clear the field
-            Product product = productMapper.toProduct(productDto);
+    public ProductFullInfoDto save(ProductFullInfoDto productFullInfoDto) throws RuntimeException{
+        if(productFullInfoDto != null) {
+            productFullInfoDto.setId(null);//Just to clear the field
+            Product product = productMapper.toProduct(productFullInfoDto);
             Product response = productRep.save(product);
-            return productMapper.toProductDto(response);
+            return productMapper.toProductFullDto(response);
         }
         return null;
     }
     @Override
-    public ProductDto update(ProductDto productDto) throws RuntimeException{
-        if(productDto != null) {
-            if(find(productDto.getId()) != null) {//Verify the existence of the product
-                Product product = productMapper.toProduct(productDto);
+    public ProductFullInfoDto update(ProductFullInfoDto productFullInfoDto) throws RuntimeException{
+        if(productFullInfoDto != null) {
+            if(find(productFullInfoDto.getId()) != null) {//Verify the existence of the product
+                Product product = productMapper.toProduct(productFullInfoDto);
                 Product response = productRep.save(product);
-                return productMapper.toProductDto(response);
+                return productMapper.toProductFullDto(response);
             }
         }
         return null;
     }
-
-    /**
-     * Function to delete a product of the database just if the foreign key constrain allows this
-     * @param id The id of the product
-     * @return If the row could be eliminated with successful
-     */
+    @Override
     public boolean delete(Integer id)
     {
-        if(productRep.findById(id).isPresent())
+        if(id != null)
         {
-            try {
-                productRep.deleteById(id);
-            }catch (Exception e)
-            {
-                //The user cannot be deleted
-                logger.error(e.getMessage());
-                return false;
-            }
-
+            productRep.deleteById(id);
             return true;
         }
+        return false;
+    }
+    @Override
+    public boolean checkExistence(Integer id) {
+        if(id != null)
+            return productRep.findById(id).isPresent();
         return false;
     }
 }

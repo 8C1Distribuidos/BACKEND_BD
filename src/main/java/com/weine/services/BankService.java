@@ -5,8 +5,6 @@ import com.weine.mappers.IBankMapper;
 import com.weine.model.dtos.BankAccountDto;
 import com.weine.repositories.jpa.IBankRep;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class BankService implements IServiceApi<BankAccountDto, Object> {
-    Logger logger = LoggerFactory.getLogger(BankService.class);
     private final IBankMapper bankMapper;
     private final IBankRep bankRep;
 
@@ -58,7 +55,7 @@ public class BankService implements IServiceApi<BankAccountDto, Object> {
     @Override
     public BankAccountDto update(BankAccountDto request) {
         if(request != null) {
-            if(find(request.getId()) != null) {//Verify the existence of the account
+            if(checkExistence(request.getId())) {//Verify the existence of the account
                 BankAccount bankAccount = bankMapper.toBankAccount(request);
                 BankAccount response = bankRep.save(bankAccount);
                 return bankMapper.toBankAccountDto(response);
@@ -70,15 +67,16 @@ public class BankService implements IServiceApi<BankAccountDto, Object> {
     @Override
     public boolean delete(Integer id) {
         if(id != null) {
-            try {
-                bankRep.deleteById(id);
-                return true;
-            }
-            catch (Exception e)
-            {
-                logger.error(e.getMessage());
-            }
+            bankRep.deleteById(id);
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean checkExistence(Integer id) {
+        if(id != null)
+            return bankRep.findById(id).isPresent();
         return false;
     }
 }

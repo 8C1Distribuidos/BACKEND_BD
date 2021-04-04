@@ -10,7 +10,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "producto_por_compra")
+@Table(name = "producto_por_compra",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"id_producto", "id_ticket"})})
 public class PurchaseItem {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -18,6 +19,7 @@ public class PurchaseItem {
     private Integer id;
     @Column(name = "cantidad", nullable = false)
     private Integer amount;
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto", nullable = false)
     private Product product;

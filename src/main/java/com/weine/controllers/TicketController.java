@@ -7,9 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller to map the http request of the ticket interface
@@ -28,6 +26,18 @@ public class TicketController extends ControllerApi<TicketDto, Object, TicketSer
     @Override
     public ResponseEntity<Page<TicketDto>> getPage(Pageable pageProp) {
         return super.getPage(pageProp);
+    }
+
+    @PostMapping
+    @Override
+    public ResponseEntity<TicketDto> saveObject(@RequestBody TicketDto requestObject) {
+        return super.saveObject(requestObject);
+    }
+
+    @PutMapping
+    @Override
+    public ResponseEntity<TicketDto> updateObject(@RequestBody TicketDto requestObject) {
+        return super.updateObject(requestObject);
     }
 
     @Override

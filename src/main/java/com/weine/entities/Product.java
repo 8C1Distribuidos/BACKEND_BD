@@ -28,7 +28,7 @@ public class Product implements Serializable {
     private BigDecimal price;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", nullable = false)
     private Category category;
 

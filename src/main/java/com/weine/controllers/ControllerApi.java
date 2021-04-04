@@ -130,8 +130,9 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
             return ResponseEntity.ok(response);
         }catch (RuntimeException e)
         {
+            logger.error(e.getMessage());
+            logger.warn(getEntityName() + " " + requestObject + " has not been saved");
             throw new ApiRequestException("Invalid fields", HttpStatus.BAD_REQUEST);
-
         }
     }
 
@@ -155,6 +156,8 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
             return ResponseEntity.ok(response);
         }catch (RuntimeException e)
         {
+            logger.error(e.getMessage());
+            logger.warn(getEntityName() + " " + requestObject + " has not been updated");
             throw new ApiRequestException("Invalid fields", HttpStatus.BAD_REQUEST);
 
         }
@@ -173,6 +176,8 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
             this.service.delete(id);
         }catch (RuntimeException e)
         {
+            logger.error(e.getMessage());
+            logger.warn(getEntityName() + " " + id + " has not been deleted");
             throw new ApiRequestException("No " + getEntityName() + " " + id + " exist", HttpStatus.NOT_FOUND);
         }
         logger.info(getEntityName() + " deleted...");

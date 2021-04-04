@@ -2,7 +2,7 @@ package com.weine.controllers;
 
 import com.weine.model.criteria.PageProp;
 import com.weine.model.criteria.ProductCriteria;
-import com.weine.model.dtos.ProductDto;
+import com.weine.model.dtos.ProductFullInfoDto;
 import com.weine.services.IServiceApi;
 import com.weine.services.ProductService;
 import org.slf4j.LoggerFactory;
@@ -17,33 +17,33 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/products")
-public class ProductController extends ControllerApi<ProductDto, ProductCriteria, ProductService>{
-     public ProductController(IServiceApi<ProductDto, ProductCriteria> service) {
+public class ProductController extends ControllerApi<ProductFullInfoDto, ProductCriteria, ProductService>{
+     public ProductController(IServiceApi<ProductFullInfoDto, ProductCriteria> service) {
         super(service);
         this.logger = LoggerFactory.getLogger(ProductController.class);
     }
 
     @GetMapping
     @Override
-    public ResponseEntity<Page<ProductDto>> getPage(PageProp pageProp, ProductCriteria criteria) {
+    public ResponseEntity<Page<ProductFullInfoDto>> getPage(PageProp pageProp, ProductCriteria criteria) {
         return super.getPage(pageProp, criteria);
     }
 
     @GetMapping("/find")
     @Override
-    public ResponseEntity<ProductDto> findObject(int id) {
+    public ResponseEntity<ProductFullInfoDto> findObject(int id) {
         return super.findObject(id);
     }
 
     @PostMapping
     @Override
-    public ResponseEntity<ProductDto> saveObject(@RequestBody ProductDto requestObject) {
+    public ResponseEntity<ProductFullInfoDto> saveObject(@RequestBody ProductFullInfoDto requestObject) {
         return super.saveObject(requestObject);
     }
 
     @PutMapping
     @Override
-    public ResponseEntity<ProductDto> updateObject(@RequestBody ProductDto requestObject) {
+    public ResponseEntity<ProductFullInfoDto> updateObject(@RequestBody ProductFullInfoDto requestObject) {
         return super.updateObject(requestObject);
     }
 

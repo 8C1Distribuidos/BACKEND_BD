@@ -5,16 +5,11 @@ import com.weine.mappers.IUserMapper;
 import com.weine.model.dtos.UserDto;
 import com.weine.repositories.jpa.IUserRep;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 /**
  * All the functions to manage the users
@@ -22,19 +17,66 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Service
-public class UserService {
-    Logger logger = LoggerFactory.getLogger(UserService.class);
+public class UserService implements IServiceApi<UserDto, Object>{
     private final IUserMapper userMapper;
     private final IUserRep userRep;
-    /**
-     * Function to show the products in pages
-     * @param pageable The details of the page
-     * @return The Page of users dto
-     */
-    public Page<UserDto> getUsers(Pageable pageable)
-    {
+
+    @Override
+    public Page<UserDto> getPage(Pageable pageable) {
         Page<User> users = userRep.findAll(pageable);
-        Page<UserDto> map = users.map(userMapper::toUserDto);
-        return map;
+        return users.map(userMapper::toUserDto);
+    }
+
+    @Override
+    public UserDto find(Integer id) {
+        if(id != null) {
+            Optional<User> userOp = userRep.findById(id);
+            if(userOp.isPresent())
+            {
+                User user = userOp.get();
+                return userMapper.toUserDto(user);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public UserDto save(UserDto request) throws RuntimeException {
+        if(request != null)
+        {
+            request.setId(null);
+            User user = userMapper.toUser(request);
+            User response = userRep.save(user);
+            return userMapper.toUserDto(response);
+        }
+        return null;
+    }
+
+    @Override
+    public UserDto update(UserDto request) throws RuntimeException {
+        if(request != null)
+        {
+            if(checkExistence(request.getId())) {
+                User user = userMapper.toUser(request);
+                User response = userRep.save(user);
+                return userMapper.toUserDto(response);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean delete(Integer id) throws RuntimeException {
+        if(id != null)
+        {
+            userRep.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkExistence(Integer id) {
+        return false;
     }
 }
