@@ -77,6 +77,8 @@ public class UserService implements IServiceApi<UserDto, Object>{
 
     @Override
     public boolean checkExistence(Integer id) {
+        if(id != null)
+            return userRep.findById(id).isPresent();
         return false;
     }
 }
