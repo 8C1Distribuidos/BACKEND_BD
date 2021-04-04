@@ -9,7 +9,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * User Dto to show the general info of the users
+ * User Dto to show the general info of the <b>users</b> as the:
+ * {@link #id} to keep the id of the user.<br>
+ * {@link #firstName} to keep the first name of the user.<br>
+ * {@link #paternalName} to keep the paternal name of the user.<br>
+ * {@link #maternalName} to keep the maternal name of the user.<br>
+ * {@link #email} to keep the email of the user.</br>
+ * {@link #birthDate} to keep the birth date of the user.</br>
+ * {@link #roles} to keep the roles of the user.</br>
  * @author Luis
  */
 @Data

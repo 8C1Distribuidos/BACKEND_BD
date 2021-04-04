@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * User Dto to show the general info of the roles
+ * Role Dto to show the general info of the <b>roles</b> as the: <br>
+ * {@link #id} to keep the id of the role.<br>
+ * {@link #role} to keep the role name.<br>
  * @author Luis
  */
 @Data

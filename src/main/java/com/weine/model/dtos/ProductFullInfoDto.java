@@ -2,9 +2,6 @@ package com.weine.model.dtos;
 
 import lombok.*;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 /**
  * Product Dto to show all the info of the products
  * @author Kaleb
@@ -15,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductFullInfoDto extends ProductDto{
     String imageLink;
-    BigDecimal price;
+    Integer price;
     Integer stock;
     CategoryDto category;
 }

@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * User Dto to show the general info of the catalogs
+ * User Dto to show the general info of the <b>catalogs</b>
+ * {@link #id} to keep the id of the catalog.<br>
+ * {@link #name} to keep the name of the catalog.<br>
  * @author Luis
  */
 @Data

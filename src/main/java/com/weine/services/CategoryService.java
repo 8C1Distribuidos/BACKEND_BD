@@ -19,7 +19,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class CategoryService implements IServiceApi<CategoryDto, Object>{
-    Logger logger = LoggerFactory.getLogger(UserService.class);
     private final ICategoryRep categoryRep;
     private final IProductMapper productMapper;
     @Override

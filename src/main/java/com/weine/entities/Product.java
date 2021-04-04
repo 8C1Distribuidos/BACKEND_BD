@@ -4,10 +4,19 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity to have the field of the table <b>"productos"</b> as the:</br>
+ * {@link #id} to keep the id of the product.<br>
+ * {@link #name} to keep the name of the product.<br>
+ * {@link #imageLink} to keep the image of the product as a link.<br>
+ * {@link #stock} to keep the stock of the product.<br>
+ * {@link #price} to keep the price of the product.<br>
+ * {@link #category} to keep the relation of the category.<br>
+ * @author Luis
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +34,7 @@ public class Product implements Serializable {
     @Column(name = "stock", nullable = false)
     private Integer stock;
     @Column(name = "precio", nullable = false)
-    private BigDecimal price;
+    private Integer price;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
