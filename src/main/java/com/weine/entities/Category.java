@@ -8,6 +8,14 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity to have the field of the table <b>"categoria_productos"</b> as the:</br>
+ * {@link #id} to keep the id of the category.<br>
+ * {@link #name} to keep the name of the category.<br>
+ * {@link #catalog} to keep the relation of the catalog.<br>
+ * {@link #products} to keep the relation of the products.<br>
+ * @author Luis
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

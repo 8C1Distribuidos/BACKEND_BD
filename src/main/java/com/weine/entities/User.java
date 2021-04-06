@@ -10,6 +10,19 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity to have the field of the table <b>"usuarios"</b> as the:</br>
+ * {@link #id} to keep the id of the user.<br>
+ * {@link #firstName} to keep the first name of the user.<br>
+ * {@link #maternalName} to keep the maternal name of the user.<br>
+ * {@link #paternalName} to keep the paternal name of the user.<br>
+ * {@link #email} to keep the email address of the user.<br>
+ * {@link #photo} to keep photo of the user.<br>
+ * {@link #password} to keep the password of the user.<br>
+ * {@link #birthDate} to keep the birth date of the user.<br>
+ * {@link #roles} to keep the relation of the user's roles.<br>
+ * @author Luis
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

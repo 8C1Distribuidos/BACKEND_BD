@@ -9,6 +9,13 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity to have the field of the table <b>"tipo_usuarios"</b> as the:</br>
+ * {@link #id} to keep the id of the role.<br>
+ * {@link #role} to keep the name of the role.<br>
+ * {@link #users} to keep the relation of the users.<br>
+ * @author Luis
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

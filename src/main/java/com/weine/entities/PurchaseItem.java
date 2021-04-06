@@ -6,6 +6,14 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity to have the field of the table <b>"producto_por_compra"</b> as the:</br>
+ * {@link #id} to keep the id of the purchase item.<br>
+ * {@link #amount} to keep the amount paid for the item.<br>
+ * {@link #product} to keep the relation of the product.<br>
+ * {@link #ticket} to keep the relation of the ticket.<br>
+ * @author Luis
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
