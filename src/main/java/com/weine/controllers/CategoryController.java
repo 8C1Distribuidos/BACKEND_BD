@@ -43,13 +43,13 @@ public class CategoryController extends ControllerApi<CategoryDto, Object, Categ
 
     @PostMapping
     @Override
-    public ResponseEntity<CategoryDto> saveObject(@RequestParam CategoryDto requestObject) {
+    public ResponseEntity<CategoryDto> saveObject(@RequestBody CategoryDto requestObject) {
         return super.saveObject(requestObject);
     }
 
     @PutMapping
     @Override
-    public ResponseEntity<CategoryDto> updateObject(@RequestParam CategoryDto requestObject) {
+    public ResponseEntity<CategoryDto> updateObject(@RequestBody CategoryDto requestObject) {
         return super.updateObject(requestObject);
     }
 
