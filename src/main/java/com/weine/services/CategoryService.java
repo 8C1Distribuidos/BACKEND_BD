@@ -54,7 +54,6 @@ public class CategoryService implements IServiceApi<CategoryDto, Object>{
     public CategoryDto update(CategoryDto request) {
         if(request != null) {
             if(find(request.getId()) != null) {
-                request.setId(null);//Just to clear the field
                 Category category = productMapper.toCategory(request);
                 Category response = categoryRep.save(category);
                 return productMapper.toCategoryDto(response);
