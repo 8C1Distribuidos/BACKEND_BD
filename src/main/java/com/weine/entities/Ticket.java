@@ -12,6 +12,15 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 import static org.hibernate.annotations.CascadeType.*;
 
+/**
+ * Entity to have the field of the table <b>"tickets"</b> as the:</br>
+ * {@link #id} to keep the id of the ticket.<br>
+ * {@link #idUser} to keep the id of the user related to the ticket.<br>
+ * {@link #dateTime} to keep the date and time of the ticket creation.<br>
+ * {@link #totalPrice} to keep the amount to pay indicated on the ticket.<br>
+ * {@link #purchaseItems} to keep the relation of the purchased products.<br>
+ * @author Luis
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
