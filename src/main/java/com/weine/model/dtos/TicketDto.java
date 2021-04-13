@@ -15,6 +15,7 @@ import java.util.Set;
  * {@link #idUser} to keep the id of the user that make this purchase.<br>
  * {@link #dateTime} to keep the date of the purchase.<br>
  * {@link #totalPrice} to keep the total price.<br>
+ * {@link #city} the city of the address.<br>
  * {@link #purchaseList} to keep the list of products purchased.<br>
  * @author Luis
  */
@@ -22,9 +23,12 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketDto implements Serializable {
-    Integer id;
-    Integer idUser;
-    LocalDateTime dateTime;
-    Integer totalPrice;
-    Set<PurchaseItemDto> purchaseList = new HashSet<>();
+    private Integer id;
+    private Integer idUser;
+    private LocalDateTime dateTime;
+    private Integer totalPrice;
+    private String zipCode;
+    private String address;
+    private CityDto city;
+    private Set<PurchaseItemDto> purchaseList = new HashSet<>();
 }

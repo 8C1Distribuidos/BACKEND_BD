@@ -19,7 +19,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryDto implements Serializable{
-    Integer id;
-    String name;
-    CatalogDto catalog;
+    private Integer id;
+    private String name;
+    private CatalogDto catalog;
 }

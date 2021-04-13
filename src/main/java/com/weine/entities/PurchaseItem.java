@@ -1,6 +1,7 @@
 package com.weine.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -18,22 +19,22 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "producto_por_compra",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"id_producto", "id_ticket"})})
+@Table(name = "producto_por_compra")
 public class PurchaseItem {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name="id_compra", unique = true, nullable = false)
-    private Integer id;
+    @EmbeddedId
+    private PurchaseItemId id;
     @Column(name = "cantidad", nullable = false)
     private Integer amount;
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto", nullable = false)
-    private Product product;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ticket", nullable = false)
+    @JoinColumn(name = "id_producto", nullable = false, insertable = false, updatable = false)
+    private Product product;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @MapsId("idTicket")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_ticket", nullable = false, insertable = false, updatable = false)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Ticket ticket;
 }

@@ -61,7 +61,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
      */
     public ResponseEntity<Page<D>> getPage(PageProp pageProp, C criteria)
     {
-        logger.info("Obtaining "+ getEntityPluralName()+ "...");
+        logger.info("Obtaining "+ getEntityPluralName()+" " + pageProp +"...");
         ResponseEntity<Page<D>> response = ResponseEntity.ok(this.service.getPage(pageProp, criteria));
         logger.info(getEntityName()+"s obtained...");
         return response;
@@ -74,7 +74,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
      * @return The page obtained
      */
     public ResponseEntity<Page<D>> getPage(Pageable pageProp)    {
-        logger.info("Obtaining "+ getEntityPluralName()+ "...");
+        logger.info("Obtaining "+ getEntityPluralName()+ " " +  pageProp + "...");
         ResponseEntity<Page<D>> response = ResponseEntity.ok(this.service.getPage(pageProp));
         logger.info(getEntityName()+"s obtained...");
         return response;
@@ -86,7 +86,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
      */
     public ResponseEntity<List<D>> getObjects()
     {
-        logger.info("Obtaining "+ getEntityPluralName()+ "...");
+        logger.info("Obtaining All "+ getEntityPluralName()+ "...");
         ResponseEntity<List<D>> response = ResponseEntity.ok(this.service.getObjects());
         logger.info(getEntityName()+"s obtained...");
         return response;
@@ -118,7 +118,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
      */
     public ResponseEntity<D> saveObject(@RequestBody D requestObject)
     {
-        logger.info("Save " + getEntityName() + "...");
+        logger.info("Save " + getEntityName() + "" + requestObject + "...");
         try{
             D response = this.service.save(requestObject);
             if(response == null)
@@ -126,7 +126,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
                 logger.warn(getEntityName() + " " + requestObject + " has not been saved");
                 throw new ApiRequestException("Invalid fields", HttpStatus.BAD_REQUEST);
             }
-            logger.info(getEntityName() + " saved...");
+            logger.info(getEntityName() + " " + response + " saved...");
             return ResponseEntity.ok(response);
         }catch (RuntimeException e)
         {
@@ -144,7 +144,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
      */
     public ResponseEntity<D> updateObject(@RequestBody D requestObject)
     {
-        logger.info("Update " + getEntityName() + "...");
+        logger.info("Update " + getEntityName() + " " + requestObject + "...");
         try{
             D response = this.service.update(requestObject);
             if(response == null)
@@ -152,7 +152,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
                 logger.warn(getEntityName() + " " + requestObject + "has not been updated");
                 throw new ApiRequestException("Invalid fields", HttpStatus.BAD_REQUEST);
             }
-            logger.info(getEntityName() + " updated...");
+            logger.info(getEntityName() + " " + response + " updated...");
             return ResponseEntity.ok(response);
         }catch (RuntimeException e)
         {
@@ -171,7 +171,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
      */
     public ResponseEntity<?> deleteObject(int id)
     {
-        logger.info("Delete" + getEntityName() + "...");
+        logger.info("Delete " + getEntityName() + " " + id+ "...");
         try {
             this.service.delete(id);
         }catch (RuntimeException e)
@@ -180,7 +180,7 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
             logger.warn(getEntityName() + " " + id + " has not been deleted");
             throw new ApiRequestException("No " + getEntityName() + " " + id + " exist", HttpStatus.NOT_FOUND);
         }
-        logger.info(getEntityName() + " deleted...");
+        logger.info(getEntityName() + " " + id +" deleted...");
         return ResponseEntity.ok().build();
     }
 

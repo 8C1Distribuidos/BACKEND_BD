@@ -19,8 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  * {@link #email} to keep the email address of the user.<br>
  * {@link #photo} to keep photo of the user.<br>
  * {@link #password} to keep the password of the user.<br>
- * {@link #birthDate} to keep the birth date of the user.<br>
- * {@link #roles} to keep the relation of the user's roles.<br>
+ * {@link #role} to keep the relation of the user role.<br>
  * @author Luis
  */
 @Data
@@ -45,11 +44,9 @@ public class User implements Serializable {
     private String photo;
     @Column(name = "contraseña", nullable = false, length = 50)
     private String password;
-    @Column(name = "fecha_nacimiento", nullable = false, length = 50)
-    private LocalDate birthDate;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="roles_usuarios", joinColumns={@JoinColumn(name="id_usuario")}, inverseJoinColumns={@JoinColumn(name="id_tipo")})
-    private Set<Role> roles = new HashSet();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo", nullable = false)
+    private Role role;
 }

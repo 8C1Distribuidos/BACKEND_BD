@@ -19,6 +19,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto implements Serializable {
-    Integer id;
-    String name;
+    private Integer id;
+    private String name;
 }

@@ -37,9 +37,18 @@ public class Ticket {
     private LocalDateTime dateTime;
     @Column(name = "monto_total", nullable = false)
     private Integer totalPrice;
+    @Column(name = "CP", nullable = false, length = 7)
+    private String zipCode;
+    @Column(name = "direccion", nullable = false, length = 100)
+    private String address;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_municipio", nullable = false)
+    private City city;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "ticket")
     @Cascade({ALL})
-    private Set<PurchaseItem> purchaseItems = new HashSet<>(1);
+    private Set<PurchaseItem> purchaseItems;
 }

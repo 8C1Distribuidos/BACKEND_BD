@@ -1,5 +1,6 @@
 package com.weine.services;
 
+import com.weine.entities.PurchaseItemId;
 import com.weine.entities.Ticket;
 import com.weine.mappers.ITicketMapper;
 import com.weine.model.dtos.PurchaseItemDto;
@@ -52,7 +53,7 @@ public class TicketService implements IServiceApi<TicketDto, Object>{
         {
             request.setId(null);
             Ticket ticket = ticketMapper.toTicket(request);
-            ticketMapper.setRelation(ticket, true);
+            ticketMapper.setRelation(ticket);
             Ticket response = ticketRep.saveAndFlush(ticket);
             return  ticketMapper.toTicketDto(response);
         }
@@ -67,15 +68,18 @@ public class TicketService implements IServiceApi<TicketDto, Object>{
                     Set<PurchaseItemDto> itemsToDelete = new HashSet<>();
                     for (PurchaseItemDto item : request.getPurchaseList()) {
                         if(item.isToDelete()){//Delete the items of the list that must to be deleted
-                            purchaseItemRep.deleteById(item.getIdItem());
-                            itemsToDelete.add(item);
+                            if (item.getProduct() != null) {
+
+                                purchaseItemRep.deleteById(new PurchaseItemId(request.getId(), item.getProduct().getId()));
+                                itemsToDelete.add(item);
+                            }
                         }
                     }
                     //And remove the request list
                     request.getPurchaseList().removeAll(itemsToDelete);
                 }
                 Ticket ticket = ticketMapper.toTicket(request);
-                ticketMapper.setRelation(ticket, false);
+                ticketMapper.setRelation(ticket);
 
                 Ticket response = ticketRep.saveAndFlush(ticket);
                 return ticketMapper.toTicketDto(response);

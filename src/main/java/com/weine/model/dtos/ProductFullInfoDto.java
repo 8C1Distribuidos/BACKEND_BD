@@ -11,8 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductFullInfoDto extends ProductDto{
-    String imageLink;
-    Integer price;
-    Integer stock;
-    CategoryDto category;
+    private String imageLink;
+    private Integer price;
+    private Integer stock;
+    private CategoryDto category;
 }

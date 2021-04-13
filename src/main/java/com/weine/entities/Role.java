@@ -1,6 +1,7 @@
 package com.weine.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
+import static org.hibernate.annotations.CascadeType.ALL;
 
 /**
  * Entity to have the field of the table <b>"tipo_usuarios"</b> as the:</br>
@@ -30,6 +32,7 @@ public class Role implements Serializable {
     private String role;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.ALL},mappedBy="roles")
-    private Set<User> users = new HashSet();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
+    @Cascade(ALL)
+    private Set<User> users;
 }

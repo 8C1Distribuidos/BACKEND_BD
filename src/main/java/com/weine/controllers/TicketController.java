@@ -40,6 +40,12 @@ public class TicketController extends ControllerApi<TicketDto, Object, TicketSer
         return super.updateObject(requestObject);
     }
 
+    @DeleteMapping
+    @Override
+    public ResponseEntity<?> deleteObject(int id) {
+        return super.deleteObject(id);
+    }
+
     @Override
     protected String getEntityName() {
         return "Ticket";

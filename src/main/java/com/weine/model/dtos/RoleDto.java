@@ -16,6 +16,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleDto implements Serializable {
-    Integer id;
-    String role;
+    private Integer id;
+    private String role;
 }
