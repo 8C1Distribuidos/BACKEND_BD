@@ -21,6 +21,8 @@ public interface IProductMapper {
 
     CatalogDto toCatalogDto(Catalog catalog);
 
+    List<CatalogDto> toCatalogDtoList(List<Catalog> catalogs);
+
     List<CategoryDto> toCategoryDtoList(List<Category> categories);
 
     CategoryDto toCategoryDto(Category category);
