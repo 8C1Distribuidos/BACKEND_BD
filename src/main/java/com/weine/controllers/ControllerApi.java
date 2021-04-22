@@ -50,7 +50,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
     protected Logger logger;
-    private final IServiceApi<D,C> service;
+    protected final IServiceApi<D,C> service;
 
     /**
      * Function to get the request of the client in a <b>GET</b> form.<br>

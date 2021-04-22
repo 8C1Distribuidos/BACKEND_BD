@@ -1,11 +1,14 @@
 package com.weine.controllers;
 
+import com.weine.exception.ApiRequestException;
+import com.weine.model.dtos.LoginDto;
 import com.weine.model.dtos.UserDto;
 import com.weine.services.IServiceApi;
 import com.weine.services.UserService;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +24,23 @@ public class UserController extends ControllerApi<UserDto, Object, UserService>{
         super(service);
         logger = LoggerFactory.getLogger(UserController.class);
     }
+
+    @PostMapping("/verify")
+    public ResponseEntity<UserDto> verifyUser(@RequestBody LoginDto credentials)
+    {
+        logger.info("Verifying "+ getEntityPluralName()+" " + credentials + "...");
+        UserService userService = (UserService) service;
+        UserDto response = userService.verifyUser(credentials.getEmail(), credentials.getPassword());
+        if(response == null)
+        {
+            logger.info(getEntityName() + " " + credentials + " has not been verified...");
+            throw new ApiRequestException("Wrong credentials", HttpStatus.NOT_FOUND);
+        }
+        logger.info(getEntityName()+"s verified...");
+        return ResponseEntity.ok(response);
+    }
+
+
 
     @GetMapping
     @Override

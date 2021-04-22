@@ -81,4 +81,20 @@ public class UserService implements IServiceApi<UserDto, Object>{
             return userRep.findById(id).isPresent();
         return false;
     }
+
+    /**
+     * Function to verify the credentials of one user and get their info.
+     * @param email the email of the user.
+     * @param password the password of the user.
+     * @return the object found with those credentials, it could return null in case of not match.
+     */
+    public UserDto verifyUser(String email, String password){
+        User user =userRep.findByEmailAndPassword(email, password);
+        if(user != null) {
+            if(user.getPassword().equals(password)) {
+                return userMapper.toUserDto(user);
+            }
+        }
+        return null;
+    }
 }
