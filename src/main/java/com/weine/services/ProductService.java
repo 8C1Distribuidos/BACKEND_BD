@@ -35,16 +35,19 @@ public class ProductService implements IServiceApi<ProductFullInfoDto, ProductCr
         return products.map(productMapper::toProductFullDto);
     }
 
-    @Override
-    public ProductFullInfoDto find(Integer id){
+    public Product getProduct(Integer id){
         if(id != null) {
             Optional<Product> pro = productRep.findById(id);
             if (pro.isPresent()) {
-                Product product = pro.get();
-                return productMapper.toProductFullDto(product);
+                return pro.get();
             }
         }
         return null;
+    }
+
+    @Override
+    public ProductFullInfoDto find(Integer id){
+        return productMapper.toProductFullDto(getProduct(id));
     }
     @Override
     public ProductFullInfoDto save(ProductFullInfoDto productFullInfoDto) throws RuntimeException{
@@ -70,9 +73,17 @@ public class ProductService implements IServiceApi<ProductFullInfoDto, ProductCr
     @Override
     public boolean delete(Integer id)
     {
-        if(id != null)
+        Product product = getProduct(id);
+        if(product != null)
         {
-            productRep.deleteById(id);
+            if(product.getItems() != null && product.getItems().isEmpty()) {
+                //If this product doesn't have any relation can be deleted
+                productRep.deleteById(id);
+            }
+            else{//In the case of this product exist in one or more relations
+                product.setDeleted(true);
+                productRep.save(product);
+            }
             return true;
         }
         return false;

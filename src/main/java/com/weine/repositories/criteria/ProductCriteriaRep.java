@@ -22,6 +22,7 @@ public class ProductCriteriaRep extends CriteriaRep<Product, ProductCriteria>{
     protected Predicate getPredicate(ProductCriteria searchCriteria, Root<Product> entityRoot) {
         List<Predicate> predicates = new ArrayList<>();
         if(Objects.nonNull(searchCriteria)) {
+            predicates.add(criteriaBuilder.equal(entityRoot.get("deleted"), false));
             if(Objects.nonNull(searchCriteria.getName())) {
                 predicates.add(criteriaBuilder.like(entityRoot.get("name"), "%" + searchCriteria.getName() + "%"));
             }

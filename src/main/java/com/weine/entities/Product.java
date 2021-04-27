@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -33,8 +34,14 @@ public class Product implements Serializable {
     private String imageLink;
     @Column(name = "stock", nullable = false)
     private Integer stock;
+    @Column(name = "deleted")
+    private boolean deleted;
     @Column(name = "precio", nullable = false)
     private Integer price;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private Set<PurchaseItem> items;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)

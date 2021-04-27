@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,6 +31,29 @@ public abstract class CriteriaRep<T,X> {
 
     /**
      * Function to make the query and get the data, applying the corresponding parameters
+     * @param searchCriteria The filters of the query
+     * @param entity The entity class path
+     * @param limit The limit of the results, if does not need set null
+     * @return The result list
+     */
+    public List<T> findAllWithFilters(X searchCriteria, Class<T> entity, Integer limit)
+    {
+        //Initializing the query
+        CriteriaQuery<T> criteriaQuery = this.criteriaBuilder.createQuery(entity);
+        Root<T> entityRoot = criteriaQuery.from(entity);
+
+        //Adding the filters
+        Predicate predicate = getPredicate(searchCriteria, entityRoot);
+        criteriaQuery.select(entityRoot).where(predicate);
+
+        if(limit != null){
+            return entityManager.createQuery(criteriaQuery).setMaxResults(limit).getResultList();
+        }
+        return entityManager.createQuery(criteriaQuery).getResultList();
+    }
+
+    /**
+     * Function to make the query and get the data, applying the corresponding parameters
      * @param pageProp The properties of the page
      * @param searchCriteria The filters of the query
      * @param entity The entity class path
@@ -37,10 +61,6 @@ public abstract class CriteriaRep<T,X> {
      */
     public Page<T> findAllWithFilters(PageProp pageProp, X searchCriteria, Class<T> entity)
     {
-        if(pageProp == null)
-        {
-            pageProp = new PageProp();
-        }
         //Initializing the query
         CriteriaQuery<T> criteriaQuery = this.criteriaBuilder.createQuery(entity);
         Root<T> entityRoot = criteriaQuery.from(entity);
