@@ -20,14 +20,18 @@ public interface ITicketMapper {
     @Mapping(target = "purchaseList", source = "purchaseItems")
     TicketDto toTicketDto(Ticket ticket);
 
+    List<TicketDto> ticketsToTicketsDto(List<Ticket> ticket);
+
     @InheritInverseConfiguration
     Ticket toTicket(TicketDto ticketDto);
 
     @Mapping(target = "toDelete", ignore = true)
+    @Mapping(target = "id", source = "product.id")
     PurchaseItemDto toPurchaseItemDto(PurchaseItem purchaseItem);
 
     @Mapping(target = "ticket", ignore = true)
-    @Mapping(target = "id.idProduct", source = "product.id")
+    @Mapping(target = "product.id", source = "id")
+    @Mapping(target = "id.idProduct", source = "id")
     PurchaseItem toPurchaseItem(PurchaseItemDto purchaseItemDto);
 
     List<CityDto> cityListToCityDtoList(List<City> cities);

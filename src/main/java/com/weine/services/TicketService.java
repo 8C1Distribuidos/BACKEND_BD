@@ -3,6 +3,7 @@ package com.weine.services;
 import com.weine.entities.PurchaseItemId;
 import com.weine.entities.Ticket;
 import com.weine.mappers.ITicketMapper;
+import com.weine.model.criteria.TicketCriteria;
 import com.weine.model.dtos.PurchaseItemDto;
 import com.weine.model.dtos.TicketDto;
 import com.weine.repositories.jpa.IPurchaseItemRep;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,10 +26,18 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class TicketService implements IServiceApi<TicketDto, Object>{
+public class TicketService implements IServiceApi<TicketDto, TicketCriteria>{
     private final ITicketRep ticketRep;
     private final ITicketMapper ticketMapper;
     private final IPurchaseItemRep purchaseItemRep;
+
+    @Override
+    public List<TicketDto> getObjects(TicketCriteria criteria) {
+        if(criteria != null && criteria.getIdUser() != null){
+            return ticketMapper.ticketsToTicketsDto(ticketRep.findAllByIdUser(criteria.getIdUser()));
+        }
+        return null;
+    }
 
     @Override
     public Page<TicketDto> getPage(Pageable pageable) {
@@ -68,9 +78,8 @@ public class TicketService implements IServiceApi<TicketDto, Object>{
                     Set<PurchaseItemDto> itemsToDelete = new HashSet<>();
                     for (PurchaseItemDto item : request.getPurchaseList()) {
                         if(item.isToDelete()){//Delete the items of the list that must to be deleted
-                            if (item.getProduct() != null) {
-
-                                purchaseItemRep.deleteById(new PurchaseItemId(request.getId(), item.getProduct().getId()));
+                            if (item.getId() != null) {
+                                purchaseItemRep.deleteById(new PurchaseItemId(request.getId(), item.getId()));
                                 itemsToDelete.add(item);
                             }
                         }

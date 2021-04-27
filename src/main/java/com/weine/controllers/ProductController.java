@@ -1,14 +1,19 @@
 package com.weine.controllers;
 
+import com.weine.exception.ApiRequestException;
 import com.weine.model.criteria.PageProp;
 import com.weine.model.criteria.ProductCriteria;
+import com.weine.model.dtos.ProductDto;
 import com.weine.model.dtos.ProductFullInfoDto;
 import com.weine.services.IServiceApi;
 import com.weine.services.ProductService;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller to map the http request of the catalog interface
@@ -18,9 +23,24 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/products")
 public class ProductController extends ControllerApi<ProductFullInfoDto, ProductCriteria, ProductService>{
+    private final ProductService productService;
      public ProductController(IServiceApi<ProductFullInfoDto, ProductCriteria> service) {
         super(service);
+        productService = (ProductService) service;
         this.logger = LoggerFactory.getLogger(ProductController.class);
+    }
+
+    @PostMapping("/find-list")
+    public ResponseEntity<List<ProductFullInfoDto>> getProducts(@RequestBody List<Integer> ids){
+        logger.info("Obtaining "+ getEntityPluralName()+" " + ids +"...");
+        List<ProductFullInfoDto> list = productService.getProducts(ids);
+        if(list == null)
+        {
+            logger.info(getEntityName()+ " " + ids + " not found...");
+            throw new ApiRequestException("The list request has not been found", HttpStatus.NOT_FOUND);
+        }
+        logger.info(getEntityPluralName()+" obtained...");
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping

@@ -1,5 +1,6 @@
 package com.weine.controllers;
 
+import com.weine.model.criteria.TicketCriteria;
 import com.weine.model.dtos.TicketDto;
 import com.weine.services.IServiceApi;
 import com.weine.services.TicketService;
@@ -9,17 +10,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Controller to map the http request of the ticket interface
  * @author Luis
  */
 @RestController
 @RequestMapping("/tickets")
-public class TicketController extends ControllerApi<TicketDto, Object, TicketService>{
+public class TicketController extends ControllerApi<TicketDto, TicketCriteria, TicketService>{
 
-    public TicketController(IServiceApi<TicketDto, Object> service) {
+    public TicketController(IServiceApi<TicketDto, TicketCriteria> service) {
         super(service);
         logger = LoggerFactory.getLogger(TicketController.class);
+    }
+
+    @PostMapping("/client-history")
+    @Override
+    public ResponseEntity<List<TicketDto>> getObjects(TicketCriteria criteria) {
+        return super.getObjects(criteria);
     }
 
     @GetMapping

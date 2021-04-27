@@ -91,6 +91,20 @@ public abstract class ControllerApi<D,C, S extends IServiceApi<D,C>> {
         logger.info(getEntityName()+"s obtained...");
         return response;
     }
+
+    /**
+     * Function to get the request of the client in a <b>GET</b> form.<br>
+     * This request is to obtain all the objects in a list with a criteria field.
+     * @return The list obtained
+     */
+    public ResponseEntity<List<D>> getObjects(C criteria)
+    {
+        logger.info("Obtaining All "+ getEntityPluralName()+ ", with this " + criteria+ "...");
+        ResponseEntity<List<D>> response = ResponseEntity.ok(this.service.getObjects(criteria));
+        logger.info(getEntityPluralName()+" obtained...");
+        return response;
+    }
+
     /**
      * Function to get the request of the client in a <b>GET</b> form.<br>
      * This request is to obtain the object with their own id.

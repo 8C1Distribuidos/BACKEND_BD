@@ -8,9 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.List;
+
 @Repository
 public interface IProductRep extends JpaRepository<Product, Integer> {
     Page<Product> findAllByNameContaining(String name, Pageable pageable);
     @Query("SELECT u FROM Product u WHERE u.name LIKE %:name% AND u.stock >= :stock")
     Page<Product> findAllWithParams(Pageable pageable, @Param("name") String name, @Param("stock") Integer stock);
+
+    List<Product> findByIdIn(Collection<Integer> ids);
 }

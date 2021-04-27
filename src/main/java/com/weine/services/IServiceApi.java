@@ -43,6 +43,13 @@ public interface IServiceApi<D,C> {
      * @return The list of the objects
      */
     default List<D> getObjects(){return  null;}
+
+    /**
+     * Function to <b>get</b> the all the objects in a list in the database, whit a filter
+     * @param criteria the filters of the search.
+     * @return The list of the objects
+     */
+    default List<D> getObjects(C criteria){return null;}
     /**
      * Function to <b>find</b> the object by their id in the database
      * @param id Id of the object to search

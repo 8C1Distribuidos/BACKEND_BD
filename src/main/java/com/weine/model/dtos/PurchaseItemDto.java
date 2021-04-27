@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * Ticket Dto to show the general <b>info of the purchases as individual item</b> as the:
- * {@link #product} to keep the product relation of the purchase.<br>
+ * {@link #id} to keep the product relation of the purchase.<br>
  * {@link #amount} to keep the amount of the products.<br>
  * {@link #toDelete} is used to know if the item must to be deleted when is called the method update.
  * if {@link #toDelete} is {@code true} this object is going to be deleted in the database and if
@@ -21,7 +21,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchaseItemDto implements Serializable {
-    private ProductDto product;
+    private Integer id;
     private Integer amount;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean toDelete = false;
