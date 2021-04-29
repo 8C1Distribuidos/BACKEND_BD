@@ -30,6 +30,7 @@ public class TicketService implements IServiceApi<TicketDto, TicketCriteria>{
     private final ITicketRep ticketRep;
     private final ITicketMapper ticketMapper;
     private final IPurchaseItemRep purchaseItemRep;
+    private final ProductService productService;
 
     @Override
     public List<TicketDto> getObjects(TicketCriteria criteria) {
@@ -65,6 +66,7 @@ public class TicketService implements IServiceApi<TicketDto, TicketCriteria>{
             Ticket ticket = ticketMapper.toTicket(request);
             ticketMapper.setRelation(ticket);
             Ticket response = ticketRep.saveAndFlush(ticket);
+
             return  ticketMapper.toTicketDto(response);
         }
         return null;

@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IUserRep extends JpaRepository<User, Integer> {
     User findByEmailAndPassword(String email, String password);
+    User findByEmail(String email);
 }
 

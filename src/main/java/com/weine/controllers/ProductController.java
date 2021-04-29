@@ -3,6 +3,7 @@ package com.weine.controllers;
 import com.weine.exception.ApiRequestException;
 import com.weine.model.criteria.PageProp;
 import com.weine.model.criteria.ProductCriteria;
+import com.weine.model.dtos.ProductAmountDto;
 import com.weine.model.dtos.ProductDto;
 import com.weine.model.dtos.ProductFullInfoDto;
 import com.weine.services.IServiceApi;
@@ -60,6 +61,13 @@ public class ProductController extends ControllerApi<ProductFullInfoDto, Product
     public ResponseEntity<ProductFullInfoDto> saveObject(@RequestBody ProductFullInfoDto requestObject) {
         return super.saveObject(requestObject);
     }
+
+    /*
+    @PostMapping("update-stock")
+    public ResponseEntity<?> updateStock(ProductAmountDto productAmountDto){
+
+    }
+     */
 
     @PutMapping
     @Override

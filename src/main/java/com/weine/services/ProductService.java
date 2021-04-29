@@ -4,6 +4,8 @@ import com.weine.entities.Product;
 import com.weine.mappers.IProductMapper;
 import com.weine.model.criteria.PageProp;
 import com.weine.model.criteria.ProductCriteria;
+import com.weine.model.dtos.ProductAmountDto;
+import com.weine.model.dtos.ProductDto;
 import com.weine.model.dtos.ProductFullInfoDto;
 import com.weine.repositories.criteria.ProductCriteriaRep;
 import com.weine.repositories.jpa.IProductRep;
@@ -45,6 +47,19 @@ public class ProductService implements IServiceApi<ProductFullInfoDto, ProductCr
         return null;
     }
 
+    /*
+    public boolean updateStock(ProductAmountDto productDto){
+        if(productDto != null && productDto.getAmount() != null){
+            Product product = getProduct(productDto.getId());
+            if(product != null){
+                product.setStock(product.getStock() - productDto.getAmount());
+                productRep.save(product);
+                return true;
+            }
+        }
+        return false;
+    }
+     */
     @Override
     public ProductFullInfoDto find(Integer id){
         return productMapper.toProductFullDto(getProduct(id));
