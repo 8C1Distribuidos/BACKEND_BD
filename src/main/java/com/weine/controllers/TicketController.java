@@ -25,7 +25,7 @@ public class TicketController extends ControllerApi<TicketDto, TicketCriteria, T
         logger = LoggerFactory.getLogger(TicketController.class);
     }
 
-    @PostMapping("/client-history")
+    @GetMapping("/client-history")
     @Override
     public ResponseEntity<List<TicketDto>> getObjects(TicketCriteria criteria) {
         return super.getObjects(criteria);
