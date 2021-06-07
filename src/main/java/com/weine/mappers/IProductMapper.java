@@ -21,6 +21,8 @@ public interface IProductMapper {
 
     CatalogDto toCatalogDto(Catalog catalog);
 
+    @Mapping(target = "categories", ignore = true)
+    Catalog catalogDtoToCatalog(CatalogDto catalogDto);
     List<CatalogDto> toCatalogDtoList(List<Catalog> catalogs);
 
     List<CategoryDto> toCategoryDtoList(List<Category> categories);

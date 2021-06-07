@@ -43,6 +43,11 @@ public class CatalogService implements IServiceApi<CatalogDto, Object>{
 
     @Override
     public CatalogDto update(CatalogDto request) throws RuntimeException {
+        if(request != null){
+            Catalog catalog = productMapper.catalogDtoToCatalog(request);
+            Catalog response = catalogRep.save(catalog);
+            return productMapper.toCatalogDto(response);
+        }
         return null;
     }
 

@@ -12,6 +12,10 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://25.111.232.239:3306/weine_test
-    username: root
-    password:
+    url: jdbc:mysql://25.4.107.19:6446/weine_test
+    username: cluster
+    password: 12345
+    hikari:
+      max-lifetime: 1200000
+      connection-timeout: 4000
+

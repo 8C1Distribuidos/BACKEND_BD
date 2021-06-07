@@ -40,16 +40,31 @@ public class CityService implements IServiceApi<CityDto, Object>{
 
     @Override
     public CityDto save(CityDto request) throws RuntimeException {
+        if(request != null){
+            request.setId(null);
+            City city = cityMapper.cityDtoToCity(request);
+            City response = cityRep.save(city);
+            return cityMapper.toCity(response);
+        }
         return null;
     }
 
     @Override
     public CityDto update(CityDto request) throws RuntimeException {
+        if(request != null){
+            City city = cityMapper.cityDtoToCity(request);
+            City response = cityRep.save(city);
+            return cityMapper.toCity(response);
+        }
         return null;
     }
 
     @Override
     public boolean delete(Integer id) throws RuntimeException {
+        if(id != null){
+            cityRep.deleteById(id);
+            return true;
+        }
         return false;
     }
 

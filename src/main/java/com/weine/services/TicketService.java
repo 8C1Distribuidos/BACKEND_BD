@@ -30,7 +30,6 @@ public class TicketService implements IServiceApi<TicketDto, TicketCriteria>{
     private final ITicketRep ticketRep;
     private final ITicketMapper ticketMapper;
     private final IPurchaseItemRep purchaseItemRep;
-    private final ProductService productService;
 
     @Override
     public List<TicketDto> getObjects(TicketCriteria criteria) {
